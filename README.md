@@ -1,4 +1,4 @@
-##Pocket_Storage
+##**Pocket_Storage**
 **Pocket_BI** is a PL/SQL Business Intelligence (**BI**) framework with the components: 
 
 * [Pocket_ETL](https://github.com/HelderVelez/Pocket_ETL) 
@@ -18,26 +18,39 @@ An example of a  *process*:  dThe document handling process in the institution a
 The application **Pocket_Reports**, to be documented later, will detail the automated creation and publishing of reports based on Pocket_Storage. 
  
  
-[TOC]
+- [**Pocket_Storage**](#pocketstorage)
+    - [**Concepts**](#concepts)
+        - [**Generic Business Report**](#generic-business-report)
+        - [**Generic Storage**](#generic-storage)
+    - [**API**](#api)
+        - [Main <b>P</b>rocedures/<b>F</b>unctions](#main-bpbroceduresbfbunctions)
+        - [less used, auxiliary or private](#less-used-auxiliary-or-private)
+    - [**Tables**](#tables)
+        - [**Definitions**](#definitions)
+            - [**Users,Institutions,Departments**](#usersinstitutionsdepartments)
+            - [**Processes,Views**](#processesviews)
+        - [**DATA Store**](#data-store-)
+
+###**Concepts**
+####     **Generic Business Report**
+* **Report columns**
+    * Title
+    * Institution and logo
+    * date of emission
+    * Columns with titles:
+      *  *Dimensions* or classifiers, in the left side
+      *  *Measures*   with units and date, in the right side
+    * optional calculated elements as pagination, totals, partials , ...
  
-###Concepts
-####     Generic Business Report
- 
-* Title
-* Institution and logo
-* date of emission
-*             Columns with titles:
-                *             *Dimensions* or classifiers, in the left side
-                *             *Measures*   with units and date, in the right side
-* optional calculated elements as pagination, totals, partials , ...
-####     Generic Storage
+
+####**Generic Storage**
 * **Definitions**
     * Users (Users table)
     * Institution: ( Inst table)
         * Department:  ( IDept table )
             * Processes:  ( Proc table )
                 * Views:  ( PViews table) - enumerate the classifiers, the units and meaning of the measures and an optional period of persistence of the information under that classifier [^period_val].
- 
+
 * **DATA Store**  
 Tables **Imgs/Deim** with dated snapshots of information (*Images*), the *facts in BI*, plus table **Imab** for undated data
     * imgs_id - snapshot key
@@ -193,7 +206,7 @@ The preferred and faster use is the img_direct path:  open, repeated new_rec and
 ||||
  
  
-#### **DATA Store** ####
+#### **DATA Store**
 
 >|Imgs|Images||||
 |-----|-----|-----|--------|-------|
@@ -237,4 +250,3 @@ The preferred and faster use is the img_direct path:  open, repeated new_rec and
 > Written with [StackEdit](https://stackedit.io/).
   
  [^period_val]: The **temporal scope** of some attributes are limited to the immediate management and others must be persistent in the long term. The rearrangement of the information allows a smaller storage growth. This **controlled *degradé*** of the details  is not present in commercial BI applications.
- 
