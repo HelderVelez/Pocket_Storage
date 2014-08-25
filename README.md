@@ -116,10 +116,7 @@ The preferred and faster use is the img_direct path:  open, repeated new_rec and
 ||id|varchar2()||
 ||tags|varchar2(19)||
 |||||
-
-
->|Inst|Institutions||||
-|-----|-----|-----|--------|-------||
+|**Inst**|**Institutions**
 ||**inst_id**|number()|not null|key
 ||inst_name|varchar2()|not null|name
 ||inst_country|varchar2()||
@@ -133,10 +130,7 @@ The preferred and faster use is the img_direct path:  open, repeated new_rec and
 ||id|varchar2()||
 ||tags|varchar2(17)||
 |||||
-
- 
->|Idept|Departments||||
-|:-----|:-----|:-----|:-----|:-------|:--|
+>|**Idept**|**Departments**||||
 ||**idept_id**|number()|not null|key
 ||**inst_id**|number()|not null|key of institution
 ||dept_name|varchar2()|not null|name
@@ -147,14 +141,12 @@ The preferred and faster use is the img_direct path:  open, repeated new_rec and
 ||rev|varchar2()||
 ||id|varchar2()||
 ||tags|varchar2(17)||
-
-
+|||||
 
 ##### **Processes,Views**
 
-
 >|Proc|Processes||||
-|:-----|:-----|:-----|:-----|:-------|:--|
+|-----|-----|-----|--------|-------|
 ||**proc_id**|Process Id|Key
 ||proc_sigl|sigla|
 ||**inst_id**|Institution Id|
@@ -170,27 +162,23 @@ The preferred and faster use is the img_direct path:  open, repeated new_rec and
 ||rev|cdbr|
 ||id|cdbr|
 ||tags|cdbr|
-
-
-
- 
->|Pviews|Views||||
-|:-----|:-----|:-----|:-----|:-------|:--|
-||**view_id**|number()|not null|View Key
-||**proc_id**|number()||Process Key
-||view_sigl|varchar2()|not null|View Acronym
-||view_desc|varchar2()||View Description
-||view_upfn|varchar2()|not null|Updated by Function
-||view_foda|varchar2()|not null|Reference Date Format
-||view_coup|varchar2()||Call By on Update
-||view_couf|varchar2()||Call By on Freeze
-||view_peup|varchar2()||Update Frequency
-||view_pefr|varchar2()||Freeze Frequency
-||view_upfr|varchar2()||Update Then Freeze
-||view_srda|varchar2()||Sql Source of Reference Date
-||view_deco|varchar2()||Counter Description
-||view_deso|varchar2()||Value Description
-||view_un|varchar2()||Value Unit Symbol
+||||
+|**Pviews**|**Views**||||
+||**view_id**|number()|not null|View Key|
+||**proc_id**|number()||Process Key|
+||view_sigl|varchar2()|not null|View Acronym|
+||view_desc|varchar2()||View Description|
+||view_upfn|varchar2()|not null|Updated by Function|
+||view_foda|varchar2()|not null|Reference Date Format|
+||view_coup|varchar2()||Call By on Update|
+||view_couf|varchar2()||Call By on Freeze|
+||view_peup|varchar2()||Update Frequency|
+||view_pefr|varchar2()||Freeze Frequency|
+||view_upfr|varchar2()||Update Then Freeze|
+||view_srda|varchar2()||Sql Source of Reference Date|
+||view_deco|varchar2()||Counter Description|
+||view_deso|varchar2()||Value Description|
+||view_un|varchar2()||Value Unit Symbol|
 ||view_dep1..8|varchar2()||Par1..Par8 Description
 ||view_hep1..8|varchar2()||Par1..Par8 Header
 ||view_dtp1..8|number()||Par1..Par8 Months until Drop
@@ -209,36 +197,31 @@ The preferred and faster use is the img_direct path:  open, repeated new_rec and
 
 >|Imgs|Images||||
 |-----|-----|-----|--------|-------|
-||**imgs_id**|number()|not null|Key 
+||**imgs_id**|number()|not null|Key| 
 ||**view_id**|number()||
-||imgs_daim|varchar2()|not null|reference date of the snapshot
+||imgs_daim|varchar2()|not null|reference date of the snapshot|
 ||imgs_dacr|date()|not null|creation date begin|
 ||imgs_un|varchar2()|units|
-||imgs_dacf|date()||creation date end
+||imgs_dacf|date()||creation date end|
 ||**special fields**||CouchDB related||
 ||imgs_couch|varchar2()||
 ||type|varchar2(6)||
-||time_stamp|varchar2()||when updated
-||user_id|number(2)|not null|user id
+||time_stamp|varchar2()||when updated|
+||user_id|number(2)|not null|user id|
 ||rev|varchar2()||
 ||id|varchar2()||
 ||tags|varchar2(33)||
-|||||
-
-
->|Deim|Image Detail|||||
-|:--|:--|:--|||
+||||||
+|**Deim**|**Image Detail**|||||
 ||**imgs_id**|number()|not null|Image key|
 ||di_id1|number()|not null|deim chpa|
 ||di_p1..p8|varchar2()||dimensions 1..8|
 ||di_c|number()|not null|counter1|
 ||di_s|number()|not null|total1|
 ||di_c_b|number()||counter2|
-||di_s_b|number()||total2
-
-
->|Imab|Open Image||||
-|-----|-----|--------|-------|
+||di_s_b|number()||total2|
+||||||
+|**Imab**|**Open Image**||||
 ||**view_id**|number()|not null|VIEW KEY
 ||ia_p1..p8|varchar2()|not null|dimensions 1..8
 ||ia_c|number()|not null|counter1
@@ -254,3 +237,4 @@ The preferred and faster use is the img_direct path:  open, repeated new_rec and
 > Written with [StackEdit](https://stackedit.io/).
   
  [^period_val]: The **temporal scope** of some attributes are limited to the immediate management and others must be persistent in the long term. The rearrangement of the information allows a smaller storage growth. This **controlled *degradé*** of the details  is not present in commercial BI applications.
+ 
