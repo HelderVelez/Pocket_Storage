@@ -23,6 +23,7 @@ The application **Pocket_Reports**, to be documented later, will detail the auto
         - [**Generic Business Report**](#generic-business-report)
         - [**Generic Storage**](#generic-storage)
     - [**API**](#api)
+        - [Packages](#Packages)
         - [Main <b>P</b>rocedures/<b>F</b>unctions](#main-bpbroceduresbfbunctions)
         - [less used, auxiliary or private](#less-used-auxiliary-or-private)
     - [**Tables**](#tables)
@@ -75,14 +76,23 @@ The parallelism between the structure of a *generic report* and the Image's Stor
 
  
 ### **API**
-#### Main <b>P</b>rocedures/<b>F</b>unctions
-Reserved view number : 1 -- for classifier maintenance 
+#### Packages
 
- Th API resides in the package **KHOUS**
+>|PACKAGE|Purpose|reserved View_Id|Obs|
+|:--|:--|--:|:--:|
+|KHOUS|API|2|main API code
+|KBEAU|Beautifier|1|optional,not documented here
+|KDOC_SRCS|schema documentation|3,4|idem
+|KCOUCH|CouchDB||idem
+|KDOC|example to institution documentation process|108..114|idem
+
+
+#### Main <b>P</b>rocedures/<b>F</b>unctions
+
  **v_img record**  is the data structure to hold the data passed into the API.
  
 >* **v_img** IS RECORD 
-  * VIEW_ID VIEWkey,
+  * VIEW_ID View_Id,
   *   IA_P1..P8 , 8 classifiers, varchar2 (100)
   * IA_UN   varchar2 (3), unit of measure
   * IA_C    integer, measure, default 1
@@ -93,11 +103,11 @@ Reserved view number : 1 -- for classifier maintenance
  
 >|P/F|Name|Description|
 |:--|:--|:--|
-|P|**p_imgini**(**VIEWKey** IN IMAB.VIEW_ID%TYPE);|initiate data gather, *imab* will be used to aggregate data|
+|P|**p_imgini**(**View_Id** IN IMAB.VIEW_ID%TYPE);|initiate data gather, *imab* will be used to aggregate data|
 |P|**p_imgnew_rec**(<br>**img_rec** IN v_img%type, <br> **pcommit** IN boolean default true);|insert/update an image record into *imab*, view_key and the classifiers are the key where the measures are added,<br>  pcommit = true -> commit each record|
 |P|**p_imgnew_rec_no_commits**(<br>*img_rec* IN v_img%type);|equal to p_imgnew_rec but without commits|
-|P| **p_imgclose**(<br>*VIEWKey*, <br> *img_date* varchar2(10) *ref_date*,<br> *data_cria* IN creation date, <br> *puserKey* in |data is moved from *imab* to *imgs/deim* using viewKey and ref_date |
-|F|**p_img_direct_open** (<br>*VIEWKey*   IN IMAB.VIEW_ID%TYPE,<br> *img_date*  IN IMGS.IMGS_daim%TYPE,<br>                             *data_cria* IN IMGS.IMGS_dacr%TYPE)|initiate data gather  directly in Imgs/Deim, without using Imab <b> returns: IMGS.IMGS_ID%TYPE
+|P| **p_imgclose**(<br>*View_Id*, <br> *img_date* varchar2(10) *ref_date*,<br> *data_cria* IN creation date, <br> *puserKey* in |data is moved from *imab* to *imgs/deim* using View_Id and ref_date |
+|F|**p_img_direct_open** (<br>*View_Id*   IN IMAB.VIEW_ID%TYPE,<br> *img_date*  IN IMGS.IMGS_daim%TYPE,<br>                             *data_cria* IN IMGS.IMGS_dacr%TYPE)|initiate data gather  directly in Imgs/Deim, without using Imab <b> returns: IMGS.IMGS_ID%TYPE
 |F| **p_img_direct_new_rec**( <br>*imgKey*    IN DEIM.IMGS_ID%TYPE,<br>*deim_chpa* IN DEIM.DI_ID1%TYPE,<br>*commitYN*  IN boolean,<br>*img_rec*   IN v_img%TYPE)| inserts a record directly in Imgs/Deim <br> returns: **boolean**
 |P|**p_img_direct_close**(<br>*imgKey* IN IMGS.IMGS_ID%TYPE)| ends the data gather for imgKey
  
