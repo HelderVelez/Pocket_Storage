@@ -31,14 +31,14 @@ The application **Pocket_Reports**, to be documented later, will detail the auto
                 *             *Measures*   with units and date, in the right side
 * optional calculated elements as pagination, totals, partials , ...
 ####     Generic Storage
-*             **Definitions**
+* **Definitions**
     * Users (Users table)
     * Institution: ( Inst table)
         * Department:  ( IDept table )
             * Processes:  ( Proc table )
                 * Views:  ( PViews table) - enumerate the classifiers, the units and meaning of the measures and an optional period of persistence of the information under that classifier [^period_val].
  
-*  **DATA Store**  
+* **DATA Store**  
 Tables **Imgs/Deim** with dated snapshots of information (*Images*), the *facts in BI*, plus table **Imab** for undated data
     * imgs_id - snapshot key
     * view_id - link to definitions to know *what* is recorded
@@ -103,7 +103,7 @@ The preferred and faster use is the img_direct path:  open, repeated new_rec and
 ##### **Users,Institutions,Departments**
 
 >|Users|Users||||
- |-----|-----|-----|--------|-------||
+|-----|-----|-----|--------|-------||
 ||user_id|number()|not null|user KEY
 ||idept_id|number()||
 ||user_sigla|varchar2(12)|not null|user SIGLA
@@ -119,7 +119,7 @@ The preferred and faster use is the img_direct path:  open, repeated new_rec and
 
 
 >|Inst|Institutions||||
-|:--|:--|:--|||
+|-----|-----|-----|--------|-------||
 ||**inst_id**|number()|not null|key
 ||inst_name|varchar2()|not null|name
 ||inst_country|varchar2()||
@@ -136,7 +136,7 @@ The preferred and faster use is the img_direct path:  open, repeated new_rec and
 
  
 >|Idept|Departments||||
- |:-----|:-----|:-----|:-----|:-------|:--|
+|:-----|:-----|:-----|:-----|:-------|:--|
 ||**idept_id**|number()|not null|key
 ||**inst_id**|number()|not null|key of institution
 ||dept_name|varchar2()|not null|name
@@ -147,11 +147,14 @@ The preferred and faster use is the img_direct path:  open, repeated new_rec and
 ||rev|varchar2()||
 ||id|varchar2()||
 ||tags|varchar2(17)||
-|||||
+
+
 
 ##### **Processes,Views**
->|Proc|Processes|||
-|:--|:--|:--|||
+
+
+>|Proc|Processes||||
+|:-----|:-----|:-----|:-----|:-------|:--|
 ||**proc_id**|Process Id|Key
 ||proc_sigl|sigla|
 ||**inst_id**|Institution Id|
@@ -169,8 +172,10 @@ The preferred and faster use is the img_direct path:  open, repeated new_rec and
 ||tags|cdbr|
 
 
+
+ 
 >|Pviews|Views||||
-|:--|:--|:--|:--|||
+|:-----|:-----|:-----|:-----|:-------|:--|
 ||**view_id**|number()|not null|View Key
 ||**proc_id**|number()||Process Key
 ||view_sigl|varchar2()|not null|View Acronym
@@ -203,7 +208,7 @@ The preferred and faster use is the img_direct path:  open, repeated new_rec and
 #### **DATA Store** ####
 
 >|Imgs|Images||||
- |-----|-----|-----|--------|-------|
+|-----|-----|-----|--------|-------|
 ||**imgs_id**|number()|not null|Key 
 ||**view_id**|number()||
 ||imgs_daim|varchar2()|not null|reference date of the snapshot
@@ -233,7 +238,7 @@ The preferred and faster use is the img_direct path:  open, repeated new_rec and
 
 
 >|Imab|Open Image||||
- |-----|-----|--------|-------|
+|-----|-----|--------|-------|
 ||**view_id**|number()|not null|VIEW KEY
 ||ia_p1..p8|varchar2()|not null|dimensions 1..8
 ||ia_c|number()|not null|counter1
