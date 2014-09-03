@@ -83,8 +83,8 @@ The parallelism between the structure of a *generic report* and the Image's Stor
 |KHOUS|API|2|main API code
 |KBEAU|Beautifier|1|optional,not documented here
 |KDOC_SRCS|schema documentation|3,4|idem
-|KCOUCH|CouchDB||idem
-|KDOC|example to institution documentation process|108..114|idem
+|KCOUCH|CouchDB related||idem
+|KDOC|example of institution's documentation process|108..114|idem
 
 
 #### Main <b>P</b>rocedures/<b>F</b>unctions
@@ -192,7 +192,7 @@ The preferred and faster use is the img_direct path:  open, repeated new_rec and
 ||Gproc
 ||||
 |**Pviews**|**Views**||||
-||**view_id**|number()|not null|View Key|
+||**view_id**|number()|not null|View Key| 
 ||**proc_id**|number()||Process Key|
 ||view_sigl|varchar2()|not null|View Acronym|
 ||view_desc|varchar2()||View Description|
@@ -218,6 +218,11 @@ The preferred and faster use is the img_direct path:  open, repeated new_rec and
 ||rev|varchar2()||cdb _rev
 ||id|varchar2()||cdb _id
 ||tags|varchar2(62)||tags
+||**keys**|
+||view_pk|primary key|view_id|
+||view_pk2|unique key|view_sigl|
+||**triggers**|||
+||Gpviews
 ||||
  
  
@@ -239,15 +244,31 @@ The preferred and faster use is the img_direct path:  open, repeated new_rec and
 ||rev|varchar2()||
 ||id|varchar2()||
 ||tags|varchar2(33)||
-||||||
+||**keys**|
+||imgs_pk|primary key|imgs_id|
+||imgs_uk|unique key|view_id|
+||||imgs_daim|
+||**triggers**|||
+||Gimgs
+||||
 |**Deim**|**Image Detail**|||||
 ||**imgs_id**|number()|not null|Image key|
-||di_id1|number()|not null|deim chpa|
+||**di_id1**|number()|not null|deim chpa|
 ||di_p1..p8|varchar2()||dimensions 1..8|
 ||di_c|number()|not null|counter1|
 ||di_s|number()|not null|total1|
 ||di_c_b|number()||counter2|
 ||di_s_b|number()||total2|
+||**keys**|
+||di_pk|primary key|imgs_id|
+||||di_id1|
+||imgs_uk|unique key|view_id|
+||||imgs_daim|
+||**index**| **for performance**|
+||di_p1_i|index|imgs_id|
+||||di_p1|
+||**triggers**|||
+||Gimgs
 ||||||
 |**Imab**|**Open Image**||||
 ||**view_id**|number()|not null|VIEW KEY
@@ -257,6 +278,9 @@ The preferred and faster use is the img_direct path:  open, repeated new_rec and
 ||ia_un|varchar2()||units
 ||ia_c_b|number()||counter2
 ||ia_s_b|number()||total2
+||**keys**|
+||imab_pk|primary key|view_id|
+||||ia_p1..ia_p8|
 
 
 [**MIT** License](http://opensource.org/licenses/mit-license.php)  
