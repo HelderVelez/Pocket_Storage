@@ -14,7 +14,7 @@ The Pocket_BI framework has the ability to update and be updated from a **Couch_
 
 The **Pocket_Storage** addresses the storage concepts needed in the <b>T</b>ransformation and <b>L</b>oading phases, bearing in mind that it will have to support the easy construction of *reports*. 
 Departing from the structure of a **Generic Business Report**, that presents some *views of a process*, we will find the best structure of the **Generic Storage** of data.  
-An example of a  *process*:  dThe document handling process in the institution and the *views* of that process could be: the details of the documents initiated and the ones in transit and the concluded ones in each department by subject and clerk on a given period.   
+An example of a  *process*:  The document handling process in the institution and the *views* of that process could be: the details of the documents initiated and the ones in transit and the concluded ones in each department by subject and clerk on a given period.   
 The application **Pocket_Reports**, to be documented later, will detail the automated creation and publishing of reports based on Pocket_Storage. 
  
  
@@ -168,23 +168,28 @@ The preferred and faster use is the img_direct path:  open, repeated new_rec and
 
 ##### **Processes,Views**
 
->|Proc|Processes||||
-|-----|-----|-----|--------|-------|
-||**proc_id**|Process Id|Key
-||proc_sigl|sigla|
-||**inst_id**|Institution Id|
-||proc_desc|Process description|
-||**idept_id**|Department Id|
-||proc_stat|Status - Active - Inactive|
-||proc_visi|Visibility status|
-||proc_obs|Observations|
-||proc_suby|Substituted By|
-||type|cdbr|
-||time_stamp||
-||**user_id**||
-||rev|cdbr|
-||id|cdbr|
-||tags|cdbr|
+>|**Proc**|**Processes**||||
+|:-----|:-----|:-----|:-----|:-------|:--|
+||**proc_id**|number()|not null|PK
+||proc_sigl|varchar2()|not null|
+||inst_id|number()||
+||proc_desc|varchar2()|not null|
+||idept_id|number(1)||
+||proc_stat|varchar2()||
+||proc_visi|varchar2()||
+||proc_obs|varchar2()||
+||proc_suby|varchar2()||
+||**special fields**||CouchDB related||
+||type|varchar2(6)||
+||time_stamp|varchar2()||when updated
+||user_id|number(1)||proc  admin user
+||rev|varchar2()||cdb _rev
+||id|varchar2()||cdb _id
+||tags|varchar2(48)||
+||status|varchar2(5)||OK, ERROR, TO_VALIDATE,
+||msg|varchar2()||
+||**triggers**|||
+||Gproc
 ||||
 |**Pviews**|**Views**||||
 ||**view_id**|number()|not null|View Key|
