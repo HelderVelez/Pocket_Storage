@@ -168,8 +168,8 @@ The preferred and faster use is the img_direct path:  open, repeated new_rec and
 
 ##### **Processes,Views**
 
->|**Proc**|**Processes**||||
-|:-----|:-----|:-----|:-----|:-------|:--|
+>|**Proc**|**Processes**|||||
+|-----|-----|-----|--------|-------||
 ||**proc_id**|number()|not null|PK
 ||proc_sigl|varchar2()|not null|
 ||inst_id|number()||
